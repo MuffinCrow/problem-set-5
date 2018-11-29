@@ -100,7 +100,72 @@ function marioAgain() {
   let height; // DO NOT MODIFY
   ////////////// DO NOT MODIFY
 
-  // WRITE YOUR EXERCISE 2 CODE HERE
+  var op2 = document.getElementById("mario-hard-output");
+  let checky = 1
+  console.log(checky);
+  do {
+    height = prompt("Enter a digit between 1 and 23");
+    if (height < 1) {
+      checky = false;
+    } else if (height > 23) {
+      checky = false;
+    } else {
+      checky = true;
+    }
+  } while (checky == false);
+
+console.log(height);
+  height = parseInt(height)
+  let width = (height + 1);
+  let row = '';
+  let i = 0;
+  let why = (i + 2);
+  let how = (width - why);
+  let who = 0;
+  let where = 0;
+    for (let i = 0; i < height; i++) {
+      why = (i + 2);
+      how = (width - why);
+      who = 0;
+      where = 0;
+        for (let k = 0; k < width; k++) {
+          if (who < how) {
+            row = (row += "&nbsp");
+            who = (who + 1);
+            console.log(who);
+          } else if (where < why) {
+            row = (row += '#');
+            where = (where + 1);
+            console.log(where);
+          }
+        }
+        row = (row += "&nbsp");
+        row = (row += "&nbsp");
+        why = (i + 2);
+        how = (width - why);
+        who = 0;
+        where = 0;
+        do {
+          row = (row += '#');
+          where = (where + 1);
+        }while (where < why);
+        //for (let k = 0; k < width; k++) {
+        //  if (where < why) {
+        //    row = (row += '#');
+        //    where = (where + 1);
+        //    console.log(where);
+        //  } else if (who < how) {
+        //    row = (row += "&nbsp");
+        //    who = (who + 1);
+        //    console.log(who);
+        //  }
+        //}
+      
+
+        row = row + '<br>';
+      }
+  console.log(row);
+  op2.innerHTML = (`<code>${row}</code>`);
 
   //////////////////////////////// DO NOT MODIFY
   check('mario-again', height); // DO NOT MODIFY
