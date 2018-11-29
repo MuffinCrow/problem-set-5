@@ -160,7 +160,7 @@ console.log(height);
         //    console.log(who);
         //  }
         //}
-      
+
 
         row = row + '<br>';
       }
@@ -218,7 +218,12 @@ function credit() {
   let card; // DO NOT MODIFY
   //////////// DO NOT MODIFY
 
-  // WRITE YOUR EXERCISE 3 CODE HERE
+  var op3 = document.getElementById("credit-output");
+  card = prompt("Enter your credit card number below:");
+  ln = card.length;
+  console.log(ln);
+  console.log(card);
+
 
   /*
    * NOTE: After reading in the card number and storing it in the 'card'
