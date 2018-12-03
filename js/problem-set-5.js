@@ -338,43 +338,47 @@ function hurricane() {
   let windspeed; // DO NOT MODIFY
   ///////////////// DO NOT MODIFY
 
-var op5 = document.getElementById("hurricane-output");
-function countDecimals(num) {
-    var sep = String(23.32).match(/\D/)[0];
-    var b = String(num).split(sep);
-  return b[1]? b[1].length : 0;
-}
-do {
-  windspeed = prompt("Enter a windspeed with one decimal place:")
-  if (windspeed == NaN) {
-    alert("Please enter a valid number!")
-  }else if (countDecimals(windspeed) > 1) {
-    alert("Make sure there is only one decimal place!")
-  }else if (windspeed < 0) {
-    alert("Please enter a positive integer!")
-  }else if (countDecimals(windspeed) == 0) {
-  alert("Please enter at least one decimal place at the end!")
-}
-}while (countDecimals(windspeed) == 0 || countDecimals(windspeed) > 1 || windspeed < 0)
-let checky = "done";
-console.log(countDecimals(windspeed));
-console.log(checky);
+  let op5 = document.getElementById("hurricane-output");
+  function countDecimals(num) {
+      var sep = String(23.32).match(/\D/)[0];
+      var b = String(num).split(sep);
+    return b[1]? b[1].length : 0;
+  }
+  do {
+    windspeed = prompt("Enter a windspeed:")
+    if (windspeed == NaN) {
+      alert("Please enter a valid number!")
+    }else if (countDecimals(windspeed) > 0) {
+      alert("Make sure the number is an integer!")
+    }else if (windspeed < 0) {
+      alert("Please enter a positive integer!")
+    }else if (isNaN(windspeed)) {
+    alert("The number entered includes a non number value!")
+  }
+}while (countDecimals(windspeed) > 0 || windspeed < 0 || isNaN(windspeed))
+  let checky = "done";
+  console.log(countDecimals(windspeed));
+  console.log(checky);
+  windspeed = parseInt(windspeed);
 
-if (windspeed >= 39 && windspeed <= 73) {
-  op5.innerHTML = (`${windspeed} is a tropical storm.`)
-}else if (windspeed >= 74 && windspeed <= 95) {
-  op5.innerHTML = (`${windspeed} is a category 1 storm.`)
-}else if (windspeed >= 96 && windspeed <= 110) {
-  op5.innerHTML = (`${windspeed} is a category 2 storm.`)
-}else if (windspeed >= 111 && windspeed <= 129) {
-  op5.innerHTML = (`${windspeed} is a category 3 storm.`)
-}else if (windspeed >= 130 && windspeed <= 156) {
-  op5.innerHTML = (`${windspeed} is a category 4 storm.`)
-}else if (windspeed >= 157) {
-  op5.innerHTML = (`${windspeed} is a category 5 storm.`)
-}else if (windspeed < 39) {
-  op5.innerHTML = (`${windspeed} is not on the Saffir-Simpson scale.`)
-}
+  if (windspeed >= 39 && windspeed <= 73) {
+    op5.innerHTML = (`Tropical Storm.`)
+  }else if (windspeed >= 74 && windspeed <= 95) {
+    op5.innerHTML = (`Category 2 Hurricane.`)
+  }else if (windspeed >= 96 && windspeed <= 110) {
+    op5.innerHTML = (`Category 2 Hurricane.`)
+  }else if (windspeed >= 111 && windspeed <= 129) {
+    op5.innerHTML = (`Category 3 Hurricane.`)
+  }else if (windspeed >= 130 && windspeed <= 156) {
+    op5.innerHTML = (`Category 4 Hurricane.`)
+  }else if (windspeed >= 157) {
+    op5.innerHTML = (`Category 5 Hurricane.`)
+  }else if (windspeed < 39) {
+    op5.innerHTML = (`The skies are calm...`)
+  }
+
+  console.log(windspeed);
+  console.log(typeof windspeed);
   ///////////////////////////////// DO NOT MODIFY
   check('hurricane', windspeed); // DO NOT MODIFY
   ///////////////////////////////// DO NOT MODIFY
@@ -404,6 +408,32 @@ function gymnastics() {
   let total = 0; //// DO NOT MODIFY
   let scores = []; // DO NOT MODIFY
   /////////////////// DO NOT MODIFY
+
+  let op6 = document.getElementById("gymnastics-output");
+for(let i = 0; i < 6; i++) {
+  do {
+    scores[i] = Number(prompt("Enter a score between 0.0  and 10.0"));
+    scores[i].toFixed(2);
+    console.log(scores[i]);
+    if (isNaN(scores[i])) {
+      alert("Please enter a number!")
+      checky = false;
+    }else if (scores[i] < 0 || scores[i] > 10) {
+      alert("Please enter a score between 0.0 and 10.0!")
+      checky = false;
+    } else {
+      checky = true;
+    }
+  }while (checky == false)
+}
+console.log(scores);
+scores.sort(function(a, b){return a-b});
+console.log(scores);
+total = scores[1] + scores[2] + scores[3] + scores[4];
+let avg = total / 4
+console.log(scores[0]);
+console.log(scores[5]);
+op6.innerHTML = (`Discarded: ${scores[0]}, ${scores[5]}</br>Score: ${avg}`);
 
   /*
    * NOTE: The 'total' variable should be representative of the sum of all
