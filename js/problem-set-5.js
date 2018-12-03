@@ -261,9 +261,48 @@ function credit() {
  */
 
 function guess() {
-
-  // WRITE YOUR EXERCISE 4 CODE HERE
-
+  var op4 = document.getElementById("guess-output");
+  let random = Math.floor((Math.random() * 1000) + 1).toFixed(0);
+  let guess = 0;
+  let guessAmount = 0;
+  let guessValue = 0;
+  let guessOut = 0;
+  let end = 0;
+  do {
+    guess = prompt("Guess the number between 1 and 1000");
+    if (guess >= 1 && guess < random) {
+      guessValue = 1;
+      guessAmount++;
+    }else if (guess <= 1000 && guess > random) {
+      guessValue = 2;
+      guessAmount++;
+    }else if (guess == random) {
+      guessValue = 5;
+      guessAmount++;
+    } else {
+      guessValue = 3;
+    }
+console.log(guessAmount);
+console.log(guessValue);
+    switch (guessValue) {
+      case 1:
+        guessOut = ("Higher");
+        alert(`${guessOut}`);
+        break;
+      case 2:
+        guessOut = ("Lower");
+        alert(`${guessOut}`);
+        break;
+      case 3:
+        guessOut = ("Invalid");
+        alert(`${guessOut}`);
+        break;
+      case 5:
+        break;
+    }
+    console.log(guessOut);
+  }while (guess !== random)
+    op4.innerHTML = (`You guessed the answer ${random} in ${guessAmount} tries!`);
   ////////////////// DO NOT MODIFY
   check('guess'); // DO NOT MODIFY
   ////////////////// DO NOT MODIFY
@@ -299,6 +338,43 @@ function hurricane() {
   let windspeed; // DO NOT MODIFY
   ///////////////// DO NOT MODIFY
 
+var op5 = document.getElementById("hurricane-output");
+function countDecimals(num) {
+    var sep = String(23.32).match(/\D/)[0];
+    var b = String(num).split(sep);
+  return b[1]? b[1].length : 0;
+}
+do {
+  windspeed = prompt("Enter a windspeed with one decimal place:")
+  if (windspeed == NaN) {
+    alert("Please enter a valid number!")
+  }else if (countDecimals(windspeed) > 1) {
+    alert("Make sure there is only one decimal place!")
+  }else if (windspeed < 0) {
+    alert("Please enter a positive integer!")
+  }else if (countDecimals(windspeed) == 0) {
+  alert("Please enter at least one decimal place at the end!")
+}
+}while (countDecimals(windspeed) == 0 || countDecimals(windspeed) > 1 || windspeed < 0)
+let checky = "done";
+console.log(countDecimals(windspeed));
+console.log(checky);
+
+if (windspeed >= 39 && windspeed <= 73) {
+  op5.innerHTML = (`${windspeed} is a tropical storm.`)
+}else if (windspeed >= 74 && windspeed <= 95) {
+  op5.innerHTML = (`${windspeed} is a category 1 storm.`)
+}else if (windspeed >= 96 && windspeed <= 110) {
+  op5.innerHTML = (`${windspeed} is a category 2 storm.`)
+}else if (windspeed >= 111 && windspeed <= 129) {
+  op5.innerHTML = (`${windspeed} is a category 3 storm.`)
+}else if (windspeed >= 130 && windspeed <= 156) {
+  op5.innerHTML = (`${windspeed} is a category 4 storm.`)
+}else if (windspeed >= 157) {
+  op5.innerHTML = (`${windspeed} is a category 5 storm.`)
+}else if (windspeed < 39) {
+  op5.innerHTML = (`${windspeed} is not on the Saffir-Simpson scale.`)
+}
   ///////////////////////////////// DO NOT MODIFY
   check('hurricane', windspeed); // DO NOT MODIFY
   ///////////////////////////////// DO NOT MODIFY
