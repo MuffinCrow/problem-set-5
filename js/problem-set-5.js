@@ -219,10 +219,151 @@ function credit() {
   //////////// DO NOT MODIFY
 
   var op3 = document.getElementById("credit-output");
-  card = prompt("Enter your credit card number below:");
-  ln = card.length;
-  console.log(ln);
+  let str = "";
+  function countDecimals(num) {
+      var sep = String(23.32).match(/\D/)[0];
+      var b = String(num).split(sep);
+    return b[1]? b[1].length : 0;
+  }
+  let checky = 0;
+  let credit = [];
+  let c = 0
+
+  do {
+    card = prompt("Enter your credit card number below");
+    if (isNaN(card)) {
+      alert("Please enter a credit card number.");
+      checky = 3;
+    }else if (countDecimals(card) != 0) {
+      alert("Please enter a credit card number.");
+      checky = 3;
+    }else if (card < 0 && card < 9999999999999999) {
+      alert("Please enter a credit card number.");
+    }else if (card.length > 16 || card.length < 13) {
+      alert("Please enter a credit card number.");
+    }else {
+      alert("Validitating...");
+      checky = -1;
+      credit = card.split("");
+      console.log(credit);
+      c = 0;
+      let cd = 0;
+
+      var imgValid = document.createElement("img");
+      var imgMaster = document.createElement("img");
+      var imgAmex = document.createElement("img");
+      var imgVisa = document.createElement("img");
+      imgVisa.src = "./images/visa.png";
+      imgMaster.src = "./images/mastercard.png";
+      imgAmex.src = "./images/amex.png";
+      imgValid.src = "./images/invalid.png";
+
+      for (c = 0; c < credit.length; c++) {
+        credit[c] = Number(credit[c]);
+      }
+      credit = Number(credit);
+      op3.innerHTML = str;
+      c = 0;
+        if (credit.length == 15 && ((credit[0] == 3 && credit[1] == 4) || (credit[0] == 3 && credit[1] == 7))) {
+          let y = 1;
+          for(c = 0; c < credit.length; c++) {
+            if (y % 2 == 0) {
+              credit[c] = (credit[c] * 2);
+              console.log(credit);
+              y++;
+              if (credit[c] > 9) {
+                credit[c] = (credit[c] - 9);
+              }
+            }else{
+              y++;
+            }
+            cd = (credit[c] + cd);
+          }
+          if (cd % 10 == 0) {
+            op3.appendChild(imgAmex);
+          }else {
+            op3.appendChild(imgValid);
+          }
+        }else if (credit.length == 16 && credit[0] == 5 && (credit[1] == 1 || credit[1] == 2 || credit[1] == 3 || credit[1] == 4 || credit[1] == 5)) {
+          let y = 2;
+          for(c = 0; c < credit.length; c++) {
+            if (y % 2 == 0) {
+              credit[c] = (credit[c] * 2);
+              console.log(credit);
+              y++;
+              if (credit[c] > 9) {
+                credit[c] = (credit[c] - 9);
+              }
+            }else{
+              y++;
+            }
+            cd = (credit[c] + cd);
+          }
+          if (cd % 10 == 0) {
+            op3.appendChild(imgMaster);
+          }else {
+            op3.appendChild(imgValid);
+          }
+        }else if ((credit.length == 13 || credit.length == 16) && credit[0] == 4) {
+          if (credit.length == 13) {
+            let y = 1;
+            for(c = 0; c < credit.length; c++) {
+              if (y % 2 == 0) {
+                credit[c] = (credit[c] * 2);
+                console.log(credit);
+                y++;
+                if (credit[c] > 9) {
+                  credit[c] = (credit[c] - 9);
+                }
+              }else{
+                y++;
+              }
+              cd = (credit[c] + cd);
+            }
+            if (cd % 10 == 0) {
+              op3.appendChild(imgVisa);
+            }else {
+              op3.appendChild(imgValid);
+            }
+          }else if (credit.length == 16) {
+            let y = 2;
+            for(c = 0; c < credit.length; c++) {
+              if (y % 2 == 0) {
+                credit[c] = (credit[c] * 2);
+                console.log(credit);
+                y++;
+                if (credit[c] > 9) {
+                  credit[c] = (credit[c] - 9);
+                }
+              }else{
+                y++;
+              }
+              cd = (credit[c] + cd);
+            }
+            if (cd % 10 == 0) {
+              op3.appendChild(imgVisa);
+            }else {
+              op3.appendChild(imgValid);
+            }
+          }
+        }else {
+          op3.appendChild(imgValid);
+        }
+
+    }
+  }while (checky != (-1))
   console.log(card);
+//  credit = card.split("");
+//  console.log(credit);
+//c = 0;
+//let cd = 0;
+//  for (let z = 0; z < credit.length; z++) {
+//    cd.concat(credit[c]);
+//    c++;
+//  }
+//console.log(cd);
+//console.log(cd.length);
+
 
 
   /*
@@ -236,6 +377,106 @@ function credit() {
   check('credit', card); // DO NOT MODIFY
   ///////////////////////// DO NOT MODIFY
 }
+/*var imgValid = document.createElement("img");
+var imgMaster = document.createElement("img");
+var imgAmex = document.createElement("img");
+var imgVisa = document.createElement("img");
+imgVisa.src = "./images/visa.png";
+imgMaster.src = "./images/mastercard.png";
+imgAmex.src = "./images/amex.png";
+imgValid.src = "./images/invalid.png";
+
+for (c = 0; c < credit.length; c++) {
+  credit[c] = Number(credit[c]);
+}
+
+op3.innerHTML = str;
+c = 0;
+  if (credit.length == 15 && ((credit[0] == 3 && credit[1] == 4) || (credit[0] == 3 && credit[1] == 7))) {
+    let y = 1;
+    for(c = 0; c < credit.length; c++) {
+      if (y % 2 == 0) {
+        credit[c] = (credit[c] * 2);
+        console.log(credit);
+        y++;
+        if (credit[c] > 9) {
+          credit[c] = (credit[c] - 9);
+        }
+      }else{
+        y++;
+      }
+      cd = (credit[c] + cd);
+    }
+    if (cd % 10 == 0) {
+      op3.appendChild(imgAmex);
+    }else {
+      op3.appendChild(imgValid);
+    }
+  }else if (credit.length == 16 && credit[0] == 5 && (credit[1] == 1 || credit[1] == 2 || credit[1] == 3 || credit[1] == 4 || credit[1] == 5)) {
+    let y = 2;
+    for(c = 0; c < credit.length; c++) {
+      if (y % 2 == 0) {
+        credit[c] = (credit[c] * 2);
+        console.log(credit);
+        y++;
+        if (credit[c] > 9) {
+          credit[c] = (credit[c] - 9);
+        }
+      }else{
+        y++;
+      }
+      cd = (credit[c] + cd);
+    }
+    if (cd % 10 == 0) {
+      op3.appendChild(imgMaster);
+    }else {
+      op3.appendChild(imgValid);
+    }
+  }else if ((credit.length == 13 || credit.length == 16) && credit[0] == 4) {
+    if (credit.length == 13) {
+      let y = 1;
+      for(c = 0; c < credit.length; c++) {
+        if (y % 2 == 0) {
+          credit[c] = (credit[c] * 2);
+          console.log(credit);
+          y++;
+          if (credit[c] > 9) {
+            credit[c] = (credit[c] - 9);
+          }
+        }else{
+          y++;
+        }
+        cd = (credit[c] + cd);
+      }
+      if (cd % 10 == 0) {
+        op3.appendChild(imgVisa);
+      }else {
+        op3.appendChild(imgValid);
+      }
+    }else if (credit.length == 16) {
+      let y = 2;
+      for(c = 0; c < credit.length; c++) {
+        if (y % 2 == 0) {
+          credit[c] = (credit[c] * 2);
+          console.log(credit);
+          y++;
+          if (credit[c] > 9) {
+            credit[c] = (credit[c] - 9);
+          }
+        }else{
+          y++;
+        }
+        cd = (credit[c] + cd);
+      }
+      if (cd % 10 == 0) {
+        op3.appendChild(imgVisa);
+      }else {
+        op3.appendChild(imgValid);
+      }
+    }
+  }else {
+    op3.appendChild(imgValid);
+  }
 
 /*
  * Guess. 5 points.
@@ -430,7 +671,7 @@ console.log(scores);
 scores.sort(function(a, b){return a-b});
 console.log(scores);
 total = scores[1] + scores[2] + scores[3] + scores[4];
-let avg = total / 4
+let avg = (total / 4).toFixed(2);
 console.log(scores[0]);
 console.log(scores[5]);
 op6.innerHTML = (`Discarded: ${scores[0]}, ${scores[5]}</br>Score: ${avg}`);
@@ -482,6 +723,111 @@ function reportCard() {
   let homeworkTotal = 0; // DO NOT MODIFY
   ///////////////////////// DO NOT MODIFY
 
+  let op7 = document.getElementById("report-card-output");
+  let t = 0;
+  let k = 0;
+  let testGrades = [];
+
+  do {
+    testGrades[t] = prompt("Enter a test grade percent. To move on to quiz grades, enter -1:")
+    if (testGrades[t] < 0 && testGrades[t] > -1) {
+      alert("Please enter a valid number")
+    }else if (testGrades[t] < -1) {
+      alert("Please enter a valid number")
+    }else if (isNaN(testGrades[t])) {
+      alert("Please enter a valid number")
+    }else if (testGrades[t] > 100) {
+      alert("Please enter a valid number")
+    }else {
+      k = testGrades[t];
+      testGrades[t] = (testGrades[t] / 100);
+      t = (t + 1);
+    }
+  }while (k != (-1))
+
+  testGrades.pop();
+  console.log(testGrades);
+
+  let q = 0;
+  k = 0;
+  let quizGrades = [];
+
+  do {
+    quizGrades[q] = prompt("Enter a quiz grade percent. To move on to homework grades, enter -1:")
+    if (quizGrades[q] < 0 && quizGrades[q] > -1) {
+      alert("Please enter a valid number")
+    }else if (quizGrades[q] < -1) {
+      alert("Please enter a valid number")
+    }else if (isNaN(quizGrades[q])) {
+      alert("Please enter a valid number")
+    }else if (quizGrades[q] > 100) {
+      alert("Please enter a valid number")
+    }else {
+      k = quizGrades[q];
+      quizGrades[q] = (quizGrades[q] / 100);
+      q = (q + 1);
+    }
+  }while (k != (-1))
+
+  quizGrades.pop();
+  console.log(quizGrades);
+
+  let h = 0;
+  k = 0;
+  let homeworkGrades = [];
+
+  do {
+    homeworkGrades[h] = prompt("Enter a homework grade percent. To get the final grade, enter -1:")
+    if (homeworkGrades[h] < 0 && homeworkGrades[h] > -1) {
+      alert("Please enter a valid number")
+    }else if (homeworkGrades[h] < -1) {
+      alert("Please enter a valid number")
+    }else if (isNaN(homeworkGrades[h])) {
+      alert("Please enter a valid number")
+    }else if (homeworkGrades[h] > 100) {
+      alert("Please enter a valid number")
+    }else {
+      k = homeworkGrades[h];
+      homeworkGrades[h] = (homeworkGrades[h] / 100);
+      h = (h + 1);
+    }
+  }while (k != (-1))
+
+  homeworkGrades.pop();
+  console.log(homeworkGrades);
+
+  for (t = 0; t < testGrades.length; t++) {
+  testTotal = (testTotal + testGrades[t]);
+}
+  let testOut = (testTotal / testGrades.length);
+//  testOut = (testOut / 100);
+
+  for (q = 0; q < quizGrades.length; q++) {
+  quizTotal = (quizTotal + quizGrades[q]);
+}
+  let quizOut = (quizTotal / quizGrades.length);
+//  quizOut = (quizOut / 100);
+
+  for (h = 0; h < homeworkGrades.length; h++) {
+  homeworkTotal = (homeworkTotal + homeworkGrades[h]);
+}
+  let homeworkOut = (homeworkTotal / homeworkGrades.length);
+//  homeworkOut = (homeworkOut / 100);
+
+  testAVG = (testOut * 0.6);
+  quizAVG = (quizOut * 0.3);
+  homeworkAVG = (homeworkOut * 0.1);
+//  testOut.toFixed(2);
+//  quizOut.toFixed(2);
+//  homeworkOut.toFixed(2);
+  testOut = Math.round(testOut * 100) / 100;
+  quizOut = Math.round(quizOut * 100) / 100;
+  homeworkOut = Math.round(homeworkOut * 100) / 100;
+
+  let gradeTotal = (testAVG + quizAVG + homeworkAVG);
+  gradeTotal = Math.round(gradeTotal * 100) / 100;
+
+
   /*
    * NOTE: The 'testTotal', 'quizTotal', and 'homeworkTotal' variables
    *       should be representative of the sum of the test scores, quiz
@@ -494,11 +840,18 @@ function reportCard() {
   let homeworks = 0; // DO NOT MODIFY
   ///////////////////// DO NOT MODIFY
 
+  tests = testGrades.length;
+  quizzes = quizGrades.length;
+  homeworks = homeworkGrades.length;
+
   /*
    * NOTE: The 'tests', 'quizzes', and 'homeworks' variables should be
    *       representative of the number of tests, quizzes, and homework
    *       grades the user enters, respectively.
    */
+
+   op7.innerHTML = (`Tests: ${testOut}</br>Quizzes: ${quizOut}</br>Homework: ${homeworkOut}</br>Grade: ${gradeTotal}`);
+
 
   /////////////////////// DO NOT MODIFY
   check('report-card', // DO NOT MODIFY
