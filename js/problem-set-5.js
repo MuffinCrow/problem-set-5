@@ -239,12 +239,11 @@ function credit() {
       checky = 3;
     }else if (card < 0 && card < 9999999999999999) {
       alert("Please enter a credit card number.");
-    }else if (card.length > 16 || card.length < 13) {
-      alert("Please enter a credit card number.");
     }else {
       alert("Validitating...");
       checky = -1;
       credit = card.split("");
+      console.log(card);
       console.log(credit);
       c = 0;
       let cd = 0;
@@ -261,12 +260,12 @@ function credit() {
       for (c = 0; c < credit.length; c++) {
         credit[c] = Number(credit[c]);
       }
-      credit = Number(credit);
+
       op3.innerHTML = str;
       c = 0;
         if (credit.length == 15 && ((credit[0] == 3 && credit[1] == 4) || (credit[0] == 3 && credit[1] == 7))) {
           let y = 1;
-          for(c = 0; c < credit.length; c++) {
+          for(c = 0; c < card.length; c++) {
             if (y % 2 == 0) {
               credit[c] = (credit[c] * 2);
               console.log(credit);
@@ -605,7 +604,7 @@ function hurricane() {
   if (windspeed >= 39 && windspeed <= 73) {
     op5.innerHTML = (`Tropical Storm.`)
   }else if (windspeed >= 74 && windspeed <= 95) {
-    op5.innerHTML = (`Category 2 Hurricane.`)
+    op5.innerHTML = (`Category 1 Hurricane.`)
   }else if (windspeed >= 96 && windspeed <= 110) {
     op5.innerHTML = (`Category 2 Hurricane.`)
   }else if (windspeed >= 111 && windspeed <= 129) {
@@ -827,6 +826,10 @@ function reportCard() {
   let gradeTotal = (testAVG + quizAVG + homeworkAVG);
   gradeTotal = Math.round(gradeTotal * 100) / 100;
 
+  testOut.toFixed(2);
+  quizOut.toFixed(2);
+  homeworkOut.toFixed(2);
+  gradeTotal.toFixed(2);
 
   /*
    * NOTE: The 'testTotal', 'quizTotal', and 'homeworkTotal' variables
