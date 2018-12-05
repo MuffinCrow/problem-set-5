@@ -230,7 +230,8 @@ function credit() {
   let c = 0
 
   do {
-    card = prompt("Enter your credit card number below");
+    card = Number(prompt("Enter your credit card number below"));
+    cc = String(card);
     if (isNaN(card)) {
       alert("Please enter a credit card number.");
       checky = 3;
@@ -242,9 +243,7 @@ function credit() {
     }else {
       alert("Validitating...");
       checky = -1;
-      credit = card.split("");
-      console.log(card);
-      console.log(credit);
+      credit = cc.split("");
       c = 0;
       let cd = 0;
 
@@ -265,10 +264,9 @@ function credit() {
       c = 0;
         if (credit.length == 15 && ((credit[0] == 3 && credit[1] == 4) || (credit[0] == 3 && credit[1] == 7))) {
           let y = 1;
-          for(c = 0; c < card.length; c++) {
+          for(c = 0; c < cc.length; c++) {
             if (y % 2 == 0) {
               credit[c] = (credit[c] * 2);
-              console.log(credit);
               y++;
               if (credit[c] > 9) {
                 credit[c] = (credit[c] - 9);
@@ -288,7 +286,6 @@ function credit() {
           for(c = 0; c < credit.length; c++) {
             if (y % 2 == 0) {
               credit[c] = (credit[c] * 2);
-              console.log(credit);
               y++;
               if (credit[c] > 9) {
                 credit[c] = (credit[c] - 9);
@@ -351,7 +348,6 @@ function credit() {
 
     }
   }while (checky != (-1))
-  console.log(card);
 //  credit = card.split("");
 //  console.log(credit);
 //c = 0;
@@ -502,28 +498,33 @@ c = 0;
 
 function guess() {
   var op4 = document.getElementById("guess-output");
-  let random = Math.floor((Math.random() * 1000) + 1).toFixed(0);
+  let random = Number(Math.floor((Math.random() * 1000) + 1).toFixed(0));
+  console.log(random);
   let guess = 0;
   let guessAmount = 0;
   let guessValue = 0;
   let guessOut = 0;
   let end = 0;
   do {
-    guess = prompt("Guess the number between 1 and 1000");
-    if (guess >= 1 && guess < random) {
+    guess = Number(prompt("Guess the number between 1 and 1000"));
+    console.log(guess);
+    if (guess === -1) {
+     break;
+   } else if (guess > 1000 || guess < 1 || isNaN(guess)) {
+      guessValue = 3;
+    }else if (guess < random) {
       guessValue = 1;
       guessAmount++;
-    }else if (guess <= 1000 && guess > random) {
+    }else if (guess > random) {
       guessValue = 2;
       guessAmount++;
-    }else if (guess == random) {
+    }else if (guess === random) {
       guessValue = 5;
       guessAmount++;
-    } else {
-      guessValue = 3;
     }
-console.log(guessAmount);
-console.log(guessValue);
+console.log("guessAmount", guessAmount);
+console.log("guessValue", guessValue);
+console.log("random", random);
     switch (guessValue) {
       case 1:
         guessOut = ("Higher");
@@ -540,9 +541,11 @@ console.log(guessValue);
       case 5:
         break;
     }
-    console.log(guessOut);
-  }while (guess !== random)
-    op4.innerHTML = (`You guessed the answer ${random} in ${guessAmount} tries!`);
+    console.log("guessOut", guessOut);
+  } while (guess !== random);
+
+  op4.innerHTML = (`You guessed the answer ${random} in ${guessAmount} tries!`);
+
   ////////////////// DO NOT MODIFY
   check('guess'); // DO NOT MODIFY
   ////////////////// DO NOT MODIFY
